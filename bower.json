@@ -1,0 +1,21 @@
+{
+  "name": "marat",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Marat <fastmarat23@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize.css": "*",
+    "jquery": "*"
+  }
+}
