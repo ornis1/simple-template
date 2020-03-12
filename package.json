@@ -23,7 +23,8 @@
   },
   "scripts": {
     "dev": "gulp",
-    "watch": "watch"
+    "watch": "watch",
+    "prod": "gulp prod"
   },
   "author": "",
   "license": "ISC",
