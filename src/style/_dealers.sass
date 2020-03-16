@@ -2,12 +2,15 @@
 .container
 	max-width: 1500px
 	margin: 0 auto
-	padding: 0 20px
+	padding: 0 20px 60px
 	@media (max-width: $mobile)
 		padding: 0
+
 .dealers
+	margin-top: 133px
 	font-family: HelveticaNeueCyr
 	color: $primary
+	position: relative
 
 	& .button
 		color: $primary
@@ -69,11 +72,15 @@
 				transform: rotate(135deg)
 
 	@media (max-width: $mobile)
+		margin-top: 33px
+		padding-bottom: 30px
 		& a.button
 			display: none
 	&__map
 		width: 100%
 		margin-bottom: 30px
+		svg
+			width: 100%
 		@media (max-width: $mobile)
 			display: none
 	&-cards

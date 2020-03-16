@@ -1,0 +1,33 @@
+.map--without-hover svg path:hover
+	fill: white
+.map
+	position: relative
+
+.map__dot
+	position: relative
+	display: block
+	z-index: 1
+	&::before,
+	&::after
+		top: 50%
+		left: 50%
+		top: 0
+		left: 0
+		display: block
+		content: ''
+		position: absolute
+		border-radius: 50%
+	&::before
+		width: 30px
+		height: 30px
+		margin-left: -15px
+		margin-top: -15px
+		background-color: rgba(255,255,255, .3)
+		// background-color: rgba(0,0,0, .3)
+	&::after
+		width: 16px
+		height: 16px
+		// background-color: #333
+		background-color: #fff
+		margin-left: -8px
+		margin-top: -8px
