@@ -7,6 +7,8 @@ $(document).ready(function() {
 	(function() {
 		var el;
 		var cb = function(e) {
+			console.log(e.target);
+
 			if (e && e.target && e.target.tagName !== "path") return;
 			if (e && e.target) {
 				el = $(e.target);
@@ -23,8 +25,8 @@ $(document).ready(function() {
 			var parentLeft = el.position().left;
 			dot.css({ top: top + parentTop, left: left + parentLeft });
 		};
-		if ($(".map__item svg").length) {
-			$(".map__item svg").on("click", cb);
+		if ($(".map").length) {
+			$(".map").on("click", cb);
 			window.addEventListener("resize", cb());
 		}
 	})();

@@ -1,7 +1,15 @@
+$width: 650px
 .header__wrapper--dark-text
 	& a
 		color: $primary
+		@media	 ( max-width: $width )
+			color: white
+
 	& .logo svg path
 		fill: $primary
+		@media	 ( max-width: $width )
+			fill: white
 	& .language
-		border-color:rgba(21,22,32,0.2)
+		border-color: rgba(21,22,32,0.2)
+		@media	 ( max-width: $width )
+			border-color: rgba(255, 255, 255, 0.15)
