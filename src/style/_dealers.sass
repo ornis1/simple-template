@@ -7,7 +7,7 @@
 		padding: 0
 
 .dealers
-	margin-top: 133px
+	// margin-top: 133px
 	font-family: HelveticaNeueCyr
 	color: $primary
 	position: relative
@@ -16,7 +16,7 @@
 		color: $primary
 		height: 60px
 		width: 263px
-		margin-bottom: 50px
+		// margin-bottom: 50px
 		transition: .3s
 		font-size: 17px
 		&--big
@@ -79,6 +79,8 @@
 	&__map
 		width: 100%
 		margin-bottom: 30px
+		& .map
+			padding-top: 0 !important
 		svg
 			width: 100%
 		@media (max-width: $mobile)
@@ -89,16 +91,16 @@
 		width: 100%
 		&__wrapper
 			display: flex
-			justify-content: space-between
 			flex-wrap: wrap
+			&>:nth-child(n)
+				flex-basis: 33%
+				@media (max-width: 1200px)
+					flex-basis: 50%
+					justify-content: flex-start !important
+			&>:nth-child(3n+2)
+				justify-content: center
 			&>:nth-child(3n)
-				padding-right: 0
-				@media ( max-width: 1170px )
-					padding-right: 20px
-			&>:nth-child(2n)
-				@media ( max-width: 1170px )
-					padding-right: 0
-
+				justify-content: flex-end
 		&__title
 			font-size: 36px
 			line-height: 36px

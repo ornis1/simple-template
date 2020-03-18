@@ -1,12 +1,18 @@
 @import _color.sass
 
 .company-card
+	// max-width: 538px
+	// margin-right: auto
+	width: 100%
 	max-width: 357px
+	min-width: 357px
 	font-family: HelveticaNeueCyr
 	color: #151620
 	display: flex column
-	padding-right: 20px
+	// padding-right: 20px
 	margin-bottom: 50px
+	&--wrapper
+		display: flex
 	@media (max-width: $mobile)
 		padding: 0 26px 32px
 		position: relative
