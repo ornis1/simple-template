@@ -7,7 +7,7 @@
 		padding: 0
 
 .dealers
-	// margin-top: 133px
+	margin-top: 183px
 	font-family: HelveticaNeueCyr
 	color: $primary
 	position: relative
@@ -97,6 +97,8 @@
 				@media (max-width: 1200px)
 					flex-basis: 50%
 					justify-content: flex-start !important
+				@media (max-width: $mobile)
+					flex-basis: 100%
 			&>:nth-child(3n+2)
 				justify-content: center
 			&>:nth-child(3n)
@@ -137,8 +139,9 @@
 		text-align: center
 		margin: 0 auto
 		font-weight: normal
-		margin-bottom: 46px
+		margin-bottom: 58px
 		@media (max-width: $mobile)
+			margin-bottom: 46px
 			padding: 0 26px
 			&--hidden
 				display: none !important
