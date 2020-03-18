@@ -41,7 +41,12 @@
 			&>:first-child
 				display: none
 	&__phone
+		min-height: 80px
+		max-height: 80px
 		margin-bottom: 30px
+		@media (max-width: $mobile)
+			min-height: auto
+			max-height: auto
 		& .right
 			display: flex
 			flex-direction: column
@@ -117,6 +122,11 @@
 			@media (max-width: $mobile)
 				display: none
 	&__address
+		min-height: 80px
+		max-height: 80px
+		display: flex
+		flex-direction: column
+		justify-content: space-between
 		font-size: 18px
 		font-weight: bold
 		margin-bottom: 36px
@@ -124,6 +134,8 @@
 		@media (max-width: $mobile)
 			font-size: 16px
 			margin-bottom: 26px
+			min-height: auto
+			max-height: auto
 		& >a
 			font-size: 16px
 			display: block
