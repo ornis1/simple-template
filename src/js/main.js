@@ -8,62 +8,38 @@ $(document).ready(function() {
 	var container = $(".map__item");
 	var cWidth, cHeight, indexW, indexH, mouseX, mouseY;
 	(function() {
+		if (!container) return;
 		cWidth = container.width();
 		cHeight = container.height();
 
-		container.click(function(e) {
-			if (e && e.target && e.target.tagName !== "path") return;
+		document.querySelector(".map__item").addEventListener(
+			"click",
 
-			dot.css({ display: "block" });
+			function(e) {
+				if (e && e.target && e.target.tagName !== "path") return;
+				dot.css({ display: "block" });
 
-			mouseX = e.offsetX;
-			mouseY = e.offsetY;
+				var rect = e.currentTarget.getBoundingClientRect(),
+					mouseX = e.clientX - rect.left,
+					mouseY = e.clientY - rect.top;
 
-			indexW = mouseX / cWidth;
-			indexH = mouseY / cHeight;
+				indexW = mouseX / cWidth;
+				indexH = mouseY / cHeight;
 
-			console.log(indexW, indexH);
-			var top = indexH * cHeight;
-			var left = indexW * cWidth;
-			dot.css({ top, left });
-		});
+				var top = indexH * cHeight;
+				var left = indexW * cWidth;
+				dot.css({ top, left });
+			},
+			false
+		);
 		window.addEventListener("resize", function() {
 			if (!indexH && !indexW) return;
 			cWidth = container.width();
 			cHeight = container.height();
-			console.log(cHeight);
+
 			var top = indexH * cHeight;
 			var left = indexW * cWidth;
 			dot.css({ top, left });
 		});
 	})();
 });
-
-// $(document).ready(function() {
-// 	(function() {
-// 		var el;
-// 		var cb = function(e) {
-// 			console.log(e.target);
-
-// 			if (e && e.target && e.target.tagName !== "path") return;
-// 			if (e && e.target) {
-// 				el = $(e.target);
-// 				e.stopPropagation();
-// 				e.preventDefault();
-// 			}
-
-// 			var dot = $(".map__dot").css({ display: "block" });
-
-// 			var left = Math.floor(el.width() / 2);
-// 			var top = Math.floor(el.height() / 2);
-
-// 			var parentTop = el.position().top;
-// 			var parentLeft = el.position().left;
-// 			dot.css({ top: top + parentTop, left: left + parentLeft });
-// 		};
-// 		if ($(".map").length) {
-// 			$(".map").on("click", cb);
-// 			window.addEventListener("resize", cb());
-// 		}
-// 	})();
-// });
