@@ -1,13 +1,21 @@
 @import _color.sass
 
 .company-card
+	// max-width: 538px
+	// margin-right: auto
+	width: 100%
 	max-width: 357px
+	min-width: 357px
 	font-family: HelveticaNeueCyr
 	color: #151620
 	display: flex column
-	padding-right: 20px
+	// padding-right: 20px
 	margin-bottom: 50px
+	&--wrapper
+		display: flex
 	@media (max-width: $mobile)
+		min-width: auto
+		max-width: auto
 		padding: 0 26px 32px
 		position: relative
 		border-bottom: 1px solid #f1f1f1
@@ -35,7 +43,12 @@
 			&>:first-child
 				display: none
 	&__phone
+		min-height: 80px
+		max-height: 80px
 		margin-bottom: 30px
+		@media (max-width: $mobile)
+			min-height: auto
+			max-height: unset
 		& .right
 			display: flex
 			flex-direction: column
@@ -76,15 +89,21 @@
 					margin-bottom: 16px
 					font-size: 12px
 					line-height: 12px
+				&>.left,
+				&>.right
+					width: 100%
 	&__phone
 		& .right
 			line-height: 27px
+			@media (max-width: $mobile)
+				display: flex
+				flex-wrap: wrap
 
 	&__person, &__phone, &__email, &__website
 		display: flex
 
 		&>:first-child
-			width: 132px
+			min-width: 132px
 			line-height: 22px
 
 		&>:last-child
@@ -111,6 +130,11 @@
 			@media (max-width: $mobile)
 				display: none
 	&__address
+		min-height: 81px
+		max-height: 81px
+		display: flex
+		flex-direction: column
+		justify-content: space-between
 		font-size: 18px
 		font-weight: bold
 		margin-bottom: 36px
@@ -118,6 +142,8 @@
 		@media (max-width: $mobile)
 			font-size: 16px
 			margin-bottom: 26px
+			min-height: auto
+			max-height: unset
 		& >a
 			font-size: 16px
 			display: block

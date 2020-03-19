@@ -2,7 +2,7 @@
  * Custom
  */
 //= partials/component1.js
-
+// <div class="map__dot"></div>
 $(document).ready(function() {
 	var dot = $(".map__dot");
 	var container = $(".map__item");
