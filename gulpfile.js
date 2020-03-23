@@ -18,6 +18,7 @@ const imagemin = require("gulp-imagemin");
 const pngquant = require("imagemin-pngquant");
 const rimraf = require("rimraf");
 const reload = browserSync.reload;
+const babel = require("gulp-babel");
 
 var path = {
   build: {
@@ -59,14 +60,21 @@ gulp.task("html:build", function() {
 
 //Таск по сборке скриптов
 gulp.task("js:build", function() {
-  return gulp
-    .src(path.src.js) //Найдем наш main файл
-    .pipe(rigger()) //Прогоним через rigger
-    .pipe(sourcemaps.init()) //Инициализируем sourcemap
-    .pipe(uglify()) //Сожмем наш js
-    .pipe(sourcemaps.write()) //Пропишем карты
-    .pipe(gulp.dest(path.build.js)) //Выплюнем готовый файл в build
-    .pipe(reload({ stream: true })); //И перезагрузим наш сервер для обновлений
+  return (
+    gulp
+      .src(path.src.js) //Найдем наш main файл
+      .pipe(rigger()) //Прогоним через rigger
+      .pipe(
+        babel({
+          presets: ["@babel/env"]
+        })
+      )
+      // .pipe(sourcemaps.init()) //Инициализируем sourcemap
+      .pipe(uglify()) //Сожмем наш js
+      .pipe(sourcemaps.write()) //Пропишем карты
+      .pipe(gulp.dest(path.build.js)) //Выплюнем готовый файл в build
+      .pipe(reload({ stream: true }))
+  ); //И перезагрузим наш сервер для обновлений
 });
 
 // таск для преобразования sass -> css
