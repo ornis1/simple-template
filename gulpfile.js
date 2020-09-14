@@ -16,6 +16,7 @@ const prefixer = require("gulp-autoprefixer");
 const cssmin = require("gulp-minify-css");
 const imagemin = require("gulp-imagemin");
 const pngquant = require("imagemin-pngquant");
+const webp = require("gulp-webp");
 const rimraf = require("rimraf");
 const reload = browserSync.reload;
 const babel = require("gulp-babel");
@@ -27,7 +28,7 @@ var path = {
     js: "build/js/",
     css: "build/css/",
     img: "build/img/",
-    fonts: "build/fonts/"
+    fonts: "build/fonts/",
   },
   src: {
     //Пути откуда брать исходники
@@ -36,7 +37,7 @@ var path = {
     style: "src/style/main.*",
     img: "src/img/**/*.*", //Синтаксис img/**/*.* означает - взять все файлы всех расширений из папки и из вложенных каталогов
     fonts: "src/fonts/**/*.*",
-    template: "src/template/**/*.html"
+    template: "src/template/**/*.html",
   },
   watch: {
     //Тут мы укажем, за изменением каких файлов мы хотим наблюдать
@@ -44,13 +45,13 @@ var path = {
     js: "src/js/**/*.js",
     style: "src/style/**/*.sass",
     img: "src/img/**/*.*",
-    fonts: "src/fonts/**/*.*"
+    fonts: "src/fonts/**/*.*",
   },
-  clean: "./build"
+  clean: "./build",
 };
 
 // таск для сборки html
-gulp.task("html:build", function() {
+gulp.task("html:build", function () {
   return gulp
     .src(path.src.html) //Выберем файлы по нужному пути
     .pipe(rigger()) //Прогоним через rigger
@@ -59,14 +60,14 @@ gulp.task("html:build", function() {
 });
 
 //Таск по сборке скриптов
-gulp.task("js:build", function() {
+gulp.task("js:build", function () {
   return (
     gulp
       .src(path.src.js) //Найдем наш main файл
       .pipe(rigger()) //Прогоним через rigger
       .pipe(
         babel({
-          presets: ["@babel/env"]
+          presets: ["@babel/env"],
         })
       )
       // .pipe(sourcemaps.init()) //Инициализируем sourcemap
@@ -78,7 +79,7 @@ gulp.task("js:build", function() {
 });
 
 // таск для преобразования sass -> css
-gulp.task("style:build", function() {
+gulp.task("style:build", function () {
   return gulp
     .src(path.src.style) //Выберем наш main.sass
     .pipe(sourcemaps.init()) //Инициализируем sourcemap
@@ -91,7 +92,7 @@ gulp.task("style:build", function() {
 });
 
 // таск по сборке картинок
-gulp.task("image:build", function() {
+gulp.task("image", () => {
   return gulp
     .src(path.src.img) //Выберем наши картинки
     .pipe(
@@ -99,15 +100,29 @@ gulp.task("image:build", function() {
         progressive: true,
         svgoPlugins: [{ removeViewBox: false }],
         use: [pngquant()],
-        interlaced: true
+        interlaced: true,
       })
     )
-    .pipe(gulp.dest(path.build.img)) //Сохраняем в build
-    .pipe(reload({ stream: true })); //И перезагрузим сервер
+    .pipe(gulp.dest(path.build.img)); //Сохраняем в build
 });
 
+// Преобразует картинки в webp формат
+gulp.task("image-webp", () => {
+  return gulp
+    .src(path.src.img) //Выберем наши картинки
+    .pipe(webp({ quality: 80, method: 6 }))
+    .pipe(gulp.dest(path.build.img)); //Сохраняем в build
+});
+
+// таск по сборке картинок
+gulp.task(
+  "image:build",
+  gulp.parallel("image", "image-webp")
+  // reload({ stream: true }); //И перезагрузим сервер
+);
+
 // таск по сборке шрифтов
-gulp.task("fonts:build", function() {
+gulp.task("fonts:build", function () {
   return gulp
     .src(path.src.fonts)
     .pipe(gulp.dest(path.build.fonts))
@@ -115,23 +130,23 @@ gulp.task("fonts:build", function() {
 });
 
 // таск по очистки папки build
-gulp.task("clean", function(cb) {
+gulp.task("clean", function (cb) {
   rimraf(path.clean, cb);
 });
 
 // Web сервер
-gulp.task("webserver", function() {
+gulp.task("webserver", function () {
   browserSync(config);
 });
 // переменная с настройками нашего Web сервера
 var config = {
   server: {
-    baseDir: "./build"
+    baseDir: "./build",
   },
   tunnel: false,
   host: "localhost",
   port: 8000,
-  logPrefix: "Marat"
+  logPrefix: "Marat",
 };
 
 // таск по сборке всего проекта
@@ -149,7 +164,7 @@ gulp.task(
 );
 
 // таск для слежения изменяющихся файлов
-gulp.task("watch", function() {
+gulp.task("watch", function () {
   gulp.watch(path.watch.html, gulp.series("html:build"));
   gulp.watch(path.watch.style, gulp.series("style:build"));
   gulp.watch(path.watch.js, gulp.series("js:build"));
